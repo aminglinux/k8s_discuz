@@ -1,4 +1,4 @@
-###在kubernetes中搭建LNMP环境，并安装Discuz
+### 在kubernetes中搭建LNMP环境，并安装Discuz
 
 说明： 本文档为课堂教学辅助项目，不做太多解释，如果有疑问可以加本人微信81677956讨论。做本实验，需要已经搭建好kubernetes集群和harbor服务。
 
