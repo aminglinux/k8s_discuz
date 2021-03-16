@@ -2,22 +2,22 @@
 
 说明： 本文档为课堂教学辅助项目，不做太多解释，如果有疑问可以加本人微信81677956讨论。做本实验，需要已经搭建好kubernetes集群和harbor服务。
 
-首先克隆本项目：git clone  https://git.coding.net/aminglinux/k8s_discuz.git
+首先克隆本项目：git clone  https://github.com/aminglinux/k8s_discuz.git
 
-####下载镜像
+#### 下载镜像
 ```
 docker pull mysql:5.7
 docker pull richarvey/nginx-php-fpm
 ```
 
-####用dockerfile重建nginx-php-fpm镜像
+#### 用dockerfile重建nginx-php-fpm镜像
 ```
 cd k8s_discuz/dz_web_dockerfile/
 docker build -t nginx-php .
 
 ```
 
-####将镜像push到harbor
+#### 将镜像push到harbor
 ```
 ##登录harbor，并push新的镜像
 docker login harbor.yuankeedu.com  //输入正确的用户名和密码
@@ -27,7 +27,7 @@ docker tag mysql:5.7 harbor.yuankeedu.com/aminglinux/mysql:5.7
 docker push harbor.yuankeedu.com/aminglinux/mysql:5.7
 ```
 
-####搭建NFS
+#### 搭建NFS
 
 假设kubernetes集群网段为172.7.5.0/24，本机IP为172.7.5.13
 * 安装包
@@ -49,7 +49,7 @@ systemctl enable nfs
 mkdir -p  /data/k8s/discuz/{db,web}
 ```
 
-####搭建MySQL服务
+#### 搭建MySQL服务
 * 创建secret (设定mysql的root密码)
 ```
 kubectl create secret generic mysql-pass --from-literal=password=DzPasswd1
@@ -72,7 +72,7 @@ kubectl create -f mysql-dp.yaml
 kubectl create -f mysql-svc.yaml
 ```
 
-####搭建Nginx+php-fpm服务
+#### 搭建Nginx+php-fpm服务
 * 搭建pv
 ```
 cd ../../k8s_discuz/nginx_php
@@ -90,7 +90,7 @@ kubectl create -f web-dp.yaml
 ```
 kubectl create -f web-svc.yaml
 ```
-####安装Discuz
+#### 安装Discuz
 * 下载dz代码 (到NFS服务器上)
 ```
 cd /tmp/
